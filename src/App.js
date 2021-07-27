@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+//import "./App.css";
+import { GlobalStyles } from "./GlobalStyle.style";
+import styled from "styled-components";
+
+import Header from "./components/Header";
+import CreateTodo from "./components/CreateTodo";
+import TodoList from "./components/TodoList";
+import TodoMobileFilter from "./components/TodoMobileFilter";
+import Footer from "./components/Footer";
+
+const AppContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyles />
+      <AppContainer>
+        <Header />
+        <CreateTodo />
+        <TodoList />
+        <TodoMobileFilter />
+        <Footer />
+      </AppContainer>
+    </>
   );
 }
 
