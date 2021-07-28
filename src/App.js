@@ -9,7 +9,7 @@ import TodoMobileFilter from "./components/TodoMobileFilter";
 import Footer from "./components/Footer";
 
 const AppContainer = styled.div`
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

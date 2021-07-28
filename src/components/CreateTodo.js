@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "../Context";
 import styled from "styled-components";
 
@@ -15,12 +15,11 @@ const StyledInput = styled.input`
   border: none;
   border-radius: 5px;
   font-family: "Josefin Sans", sans-serif;
+  font-size: 16px;
 `;
 
-let uniqueId = require("lodash.uniqueid");
-
 function CreateTodo() {
-  const { value, onChange, onSubmit, storedTodos } = useContext(Context);
+  const { value, onChange, onSubmit } = useContext(Context);
   /*const [storedTodos, setStoredTodos] = useState([]);
 
   const [value, setValue] = useState("");

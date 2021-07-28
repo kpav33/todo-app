@@ -11,7 +11,7 @@ import imgDark from "./images/bg-desktop-dark.jpg";
 export const GlobalStyles = createGlobalStyle`
     :root {
         --bright-blue: hsl(220, 98%, 61%);
-        --check-background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+        --check-background: linear-gradient(150deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
         // Light Theme
         --light-gray: hsl(0, 0%, 98%);
         --very-light-grayish-blue: hsl(236, 33%, 92%);
