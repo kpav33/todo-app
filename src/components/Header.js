@@ -6,6 +6,10 @@ const HeaderStyle = styled.header`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+
+  h1 {
+    letter-spacing: 9px;
+  }
 `;
 
 function Header() {

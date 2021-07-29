@@ -12,6 +12,10 @@ const ClearDiv = styled.div`
   color: var(--dark-grayish-blue);
   font-size: 16px;
   border-radius: 0 0 8px 8px;
+
+  @media only screen and (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const FilterDiv = styled.div`
@@ -23,6 +27,32 @@ const FilterDiv = styled.div`
   justify-content: space-evenly;
   align-items: center;
   border-radius: 8px;
+
+  @media only screen and (min-width: 768px) {
+    display: none;
+  }
+`;
+
+const DesktopDiv = styled.div`
+  display: none;
+
+  @media only screen and (min-width: 768px) {
+    display: flex;
+    width: 100%;
+    background: var(--very-dark-desaturated-blue);
+    padding: 1.5rem;
+    color: var(--dark-grayish-blue);
+    font-size: 16px;
+    border-radius: 0 0 8px 8px;
+    justify-content: space-between;
+    align-items: center;
+
+    div {
+      button {
+        margin-left: 1rem;
+      }
+    }
+  }
 `;
 
 const ButtonStyle = styled.button`
@@ -33,9 +63,12 @@ const ButtonStyle = styled.button`
   font-family: "Josefin Sans", sans-serif;
   cursor: pointer;
 
-  &:hover,
   &:focus {
     color: var(--bright-blue);
+  }
+
+  &:hover {
+    color: var(--light-grayish-blue-hover);
   }
 `;
 
@@ -65,6 +98,20 @@ function TodoMobileFilter() {
         <ButtonStyle onClick={handleClickActiveOne}>Active</ButtonStyle>
         <ButtonStyle onClick={handleClickCompleted}>Completed</ButtonStyle>
       </FilterDiv>
+      <DesktopDiv>
+        {`${storedTodos.length} items left`}
+        <div>
+          <ButtonStyle
+            style={{ color: clickAll ? "var(--bright-blue)" : null }}
+            onClick={handleClickAll}
+          >
+            All
+          </ButtonStyle>
+          <ButtonStyle onClick={handleClickActiveOne}>Active</ButtonStyle>
+          <ButtonStyle onClick={handleClickCompleted}>Completed</ButtonStyle>
+        </div>
+        <ButtonStyle onClick={clearCompleted}>Clear completed</ButtonStyle>
+      </DesktopDiv>
     </>
   );
 }

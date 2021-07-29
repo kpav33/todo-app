@@ -66,18 +66,6 @@ function ContextProvider({ children }) {
     console.log(todoArray);
   }
 
-  // Show or hide delete a todo icon
-  const [isHovering, setIsHovering] = useState(false);
-
-  function handleMouseOver() {
-    setIsHovering(true);
-    console.log("HOVERING!!!!");
-  }
-
-  function handleMouseOut() {
-    setIsHovering(false);
-  }
-
   //console.log(isHovering);
 
   // Handle deleting a single item from todo list
@@ -131,9 +119,6 @@ function ContextProvider({ children }) {
         setStoredTodos,
         handleChecked,
         handleDeleteClick,
-        handleMouseOver,
-        handleMouseOut,
-        isHovering,
         clearCompleted,
         handleClickActive,
         storedTodosBackup,

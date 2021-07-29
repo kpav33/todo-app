@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
 import { Context } from "../Context";
@@ -49,10 +49,15 @@ const CheckBoxContainer = styled.div`
     position: absolute;
     top: -4px;
     width: 25px;
+
+    &:hover {
+      outline: 1px solid var(--bright-blue);
+    }
   }
 
-  label:after {
-    border: 2px solid #fff;
+  // Modify border width to make checkbox bolder or thinner
+  label::after {
+    border: 3px solid #fff;
     border-top: none;
     border-right: none;
     content: "";
@@ -65,8 +70,13 @@ const CheckBoxContainer = styled.div`
     width: 12px;
   }
 
+  // Cant focus if set to visibility: hidden
   input {
-    visibility: hidden;
+    opacity: 0;
+  }
+
+  input:focus + label {
+    outline: 5px solid var(--bright-blue);
   }
 
   input:checked + label {
@@ -74,7 +84,7 @@ const CheckBoxContainer = styled.div`
     border-color: var(--darker-grayish-blue);
   }
 
-  input:checked + label:after {
+  input:checked + label::after {
     opacity: 1;
   }
 `;
@@ -86,8 +96,19 @@ function TodoItem({ todo }) {
     textDecoration: "line-through",
   };
 
+  // Instead of tracking a seperate state for each TodoItem you could keep an object in state that has a key indicating if the object with that particular key as index is hovered or not
+  // https://stackoverflow.com/questions/53194663/reactjs-render-single-icon-on-hover-for-list-item-rendered-from-array
+
+  const [hover, setHover] = useState(false);
+
+  // onMouseOver and onMouseOut event bubble, so the handler also triggers for children of the element. onMouseEnter and onMouseLeave don't bubble.
+  // https://stackoverflow.com/questions/34071798/prevent-onmouseout-from-firing-on-child-elements
+
   return (
-    <TodoContainer>
+    <TodoContainer
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
       <TodoContainerItem>
         <CheckBoxContainer>
           <input
@@ -100,20 +121,14 @@ function TodoItem({ todo }) {
         </CheckBoxContainer>
         <p style={todo.completed ? styleCompleted : null}>{todo.text}</p>
       </TodoContainerItem>
-      {/*isHovering ? (
+      {hover && (
         <VscClose
           size="26px"
           color="var(--darker-grayish-blue)"
           onClick={(event) => handleDeleteClick(event)}
           className="closeButton"
         />
-      ) : null*/}
-      <VscClose
-        size="26px"
-        color="var(--darker-grayish-blue)"
-        onClick={(event) => handleDeleteClick(event)}
-        className="closeButton"
-      />
+      )}
     </TodoContainer>
   );
 }

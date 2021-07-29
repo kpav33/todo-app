@@ -1,7 +1,8 @@
 // https://www.youtube.com/watch?v=-FZzPHSLauc
 
 import { createGlobalStyle } from "styled-components";
-import imgDark from "./images/bg-desktop-dark.jpg";
+import imgDarkDesktop from "./images/bg-desktop-dark.jpg";
+import imgDarkMobile from "./images/bg-mobile-dark.jpg";
 
 /*
 - Mobile: 375px
@@ -38,8 +39,12 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
         color: white;
-        background: var(--very-dark-blue) url(${imgDark}) no-repeat 0% 0% / 30rem 70vw;
+        background: var(--very-dark-blue) url(${imgDarkMobile}) no-repeat 0% 0% / 30rem 70vw;
         font-size: 18px;
         font-family: 'Josefin Sans', sans-serif;
+
+        @media only screen and (min-width: 768px) {
+            background: var(--very-dark-blue) url(${imgDarkDesktop}) no-repeat 0% 0% / 100% 20vw;
+        }
     }
 `;

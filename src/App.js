@@ -15,6 +15,11 @@ const AppContainer = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 1rem;
+
+  @media only screen and (min-width: 768px) {
+    width: 40%;
+    margin: 0 auto;
+  }
 `;
 
 function App() {
