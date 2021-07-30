@@ -11,17 +11,17 @@ const StyledForm = styled.form`
 const StyledInput = styled.input`
   width: 100%;
   padding: 1.3rem;
-  color: var(--light-grayish-blue);
-  background: var(--very-dark-desaturated-blue);
+  color: ${({ theme }) => theme.todoTextColor};
+  background: ${({ theme }) => theme.backgroundInput};
   border: none;
   border-radius: 5px;
   font-family: "Josefin Sans", sans-serif;
   font-size: 16px;
   caret-color: var(--bright-blue);
-  padding-left: 3.5rem;
+  //padding-left: 3.5rem;
 `;
 // Maybe remove looks a bit weird??
-const Dot = styled.div`
+/*const Dot = styled.div`
   height: 25px;
   width: 25px;
   background-color: inherit;
@@ -31,35 +31,15 @@ const Dot = styled.div`
   position: absolute;
   top: 16px;
   left: 15px;
-`;
+`;*/
 
 function CreateTodo() {
   const { value, onChange, onSubmit } = useContext(Context);
-  /*const [storedTodos, setStoredTodos] = useState([]);
 
-  const [value, setValue] = useState("");
-
-  function onChange(event) {
-    setValue(event.target.value);
-  }
-
-  function onSubmit(event) {
-    event.preventDefault();
-    console.log("SUBMITTED " + value);
-    let todo = {
-      id: uniqueId(),
-      text: value,
-      completed: false,
-    };
-    setStoredTodos((prevArray) => [...prevArray, todo]);
-    setValue("");
-  }*/
-
-  //console.log(value);
   return (
     <StyledForm onSubmit={onSubmit}>
       {/* Dot added temporarly, part of the design, but I don't like how it looks */}
-      <Dot />
+      {/*<Dot />*/}
       <StyledInput
         type="text"
         name="todoInput"

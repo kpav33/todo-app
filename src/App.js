@@ -1,5 +1,8 @@
 //import "./App.css";
+import React, { useState } from "react";
 import { GlobalStyles } from "./GlobalStyle.style";
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "./components/Themes";
 import styled from "styled-components";
 
 import Header from "./components/Header";
@@ -23,17 +26,23 @@ const AppContainer = styled.div`
 `;
 
 function App() {
+  const [theme, setTheme] = useState("dark");
+  const themeToggler = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
   return (
-    <>
-      <GlobalStyles />
-      <AppContainer>
-        <Header />
-        <CreateTodo />
-        <TodoList />
-        <TodoMobileFilter />
-        <Footer />
-      </AppContainer>
-    </>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <>
+        <GlobalStyles />
+        <AppContainer>
+          <Header themeToggler={themeToggler} theme={theme} />
+          <CreateTodo />
+          <TodoList />
+          <TodoMobileFilter />
+          <Footer />
+        </AppContainer>
+      </>
+    </ThemeProvider>
   );
 }
 

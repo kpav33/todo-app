@@ -9,11 +9,11 @@ const TodoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--very-dark-desaturated-blue);
+  background: ${({ theme }) => theme.todoBackground};
   padding: 0.5rem 1rem;
-  border-bottom: 1.5px solid var(--darker-grayish-blue);
+  border-bottom: 1.5px solid ${({ theme }) => theme.inputBorderBottom};
   font-size: 16px;
-  color: var(--light-grayish-blue);
+  color: ${({ theme }) => theme.todoTextColor};
 
   svg {
     opacity: 1;
@@ -23,6 +23,10 @@ const TodoContainer = styled.div`
   // Prevent pointer from targetting path (only allow on svg)
   path {
     pointer-events: none;
+  }
+
+  .closeButton {
+    color: ${({ theme }) => theme.closeButton};
   }
 `;
 
@@ -34,14 +38,19 @@ const TodoContainerItem = styled.div`
   p {
     margin-left: 1rem;
   }
+
+  .styleCompleted {
+    color: ${({ theme }) => theme.todoFinished};
+    text-decoration: line-through;
+  }
 `;
 
 const CheckBoxContainer = styled.div`
   position: relative;
 
   label {
-    background-color: var(--very-dark-desaturated-blue);
-    border: 1px solid var(--darker-grayish-blue);
+    background-color: ${({ theme }) => theme.labelBackgroundColor};
+    border: 1px solid ${({ theme }) => theme.labelBorder};
     border-radius: 50%;
     cursor: pointer;
     height: 25px;
@@ -76,12 +85,12 @@ const CheckBoxContainer = styled.div`
   }
 
   input:focus + label {
-    outline: 5px solid var(--bright-blue);
+    outline: 2px solid var(--bright-blue);
   }
 
   input:checked + label {
     background: var(--check-background);
-    border-color: var(--darker-grayish-blue);
+    border-color: ${({ theme }) => theme.labelBorder};
   }
 
   input:checked + label::after {
@@ -91,10 +100,6 @@ const CheckBoxContainer = styled.div`
 
 function TodoItem({ todo }) {
   const { handleChecked, handleDeleteClick } = useContext(Context);
-  const styleCompleted = {
-    color: "var(--darker-grayish-blue)",
-    textDecoration: "line-through",
-  };
 
   // Instead of tracking a seperate state for each TodoItem you could keep an object in state that has a key indicating if the object with that particular key as index is hovered or not
   // https://stackoverflow.com/questions/53194663/reactjs-render-single-icon-on-hover-for-list-item-rendered-from-array
@@ -119,12 +124,11 @@ function TodoItem({ todo }) {
           />
           <label htmlFor={todo.id} />
         </CheckBoxContainer>
-        <p style={todo.completed ? styleCompleted : null}>{todo.text}</p>
+        <p className={todo.completed ? "styleCompleted" : null}>{todo.text}</p>
       </TodoContainerItem>
       {hover && (
         <VscClose
           size="26px"
-          color="var(--darker-grayish-blue)"
           onClick={(event) => handleDeleteClick(event)}
           className="closeButton"
         />

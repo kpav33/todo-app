@@ -1,8 +1,6 @@
 // https://www.youtube.com/watch?v=-FZzPHSLauc
 
 import { createGlobalStyle } from "styled-components";
-import imgDarkDesktop from "./images/bg-desktop-dark.jpg";
-import imgDarkMobile from "./images/bg-mobile-dark.jpg";
 
 /*
 - Mobile: 375px
@@ -16,7 +14,7 @@ export const GlobalStyles = createGlobalStyle`
         // Light Theme
         --light-gray: hsl(0, 0%, 98%);
         --very-light-grayish-blue: hsl(236, 33%, 92%);
-        --light-grayish-blue: hsl(233, 11%, 84%);
+        --light-grayish-blue: hsl(236, 33%, 92%);
         --dark-grayish-blue: hsl(236, 9%, 61%);
         --very-dark-grayish-blue: hsl(235, 19%, 35%);
         // Dark Theme
@@ -35,16 +33,30 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
     }
 
+    html {
+        max-width: 1920px;
+        margin: 0 auto;
+    }
+
     body {
         margin: 0;
         padding: 0;
+        //color: ${({ theme }) => theme.text};
         color: white;
-        background: var(--very-dark-blue) url(${imgDarkMobile}) no-repeat 0% 0% / 30rem 70vw;
+        background: url(${({ theme }) => theme.imgMobile});
+        background-repeat: no-repeat;
+        background-size: 100% 15rem;
+        background-color: ${({ theme }) => theme.background};
         font-size: 18px;
         font-family: 'Josefin Sans', sans-serif;
+        // Animate transition from dark to light
+        //transition: all 0.50s linear;
 
         @media only screen and (min-width: 768px) {
-            background: var(--very-dark-blue) url(${imgDarkDesktop}) no-repeat 0% 0% / 100% 20vw;
+            background: url(${({ theme }) => theme.imgDesktop});
+            background-repeat: no-repeat;
+            background-size: 100% 15rem;
+            background-color: ${({ theme }) => theme.background};
         }
     }
 `;

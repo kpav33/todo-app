@@ -7,9 +7,9 @@ const ClearDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background: var(--very-dark-desaturated-blue);
+  background: ${({ theme }) => theme.backgroundClearDiv};
   padding: 1.5rem;
-  color: var(--dark-grayish-blue);
+  color: ${({ theme }) => theme.backgroundClearDivColor};
   font-size: 16px;
   border-radius: 0 0 8px 8px;
 
@@ -20,7 +20,7 @@ const ClearDiv = styled.div`
 
 const FilterDiv = styled.div`
   margin-top: 1rem;
-  background: var(--very-dark-desaturated-blue);
+  background: ${({ theme }) => theme.backgroundFilterDiv};
   padding: 1.5rem;
   width: 100%;
   display: flex;
@@ -39,9 +39,9 @@ const DesktopDiv = styled.div`
   @media only screen and (min-width: 768px) {
     display: flex;
     width: 100%;
-    background: var(--very-dark-desaturated-blue);
+    background: ${({ theme }) => theme.backgroundDesktopDiv};
     padding: 1.5rem;
-    color: var(--dark-grayish-blue);
+    color: ${({ theme }) => theme.desktopDivColor};
     font-size: 16px;
     border-radius: 0 0 8px 8px;
     justify-content: space-between;
@@ -57,8 +57,9 @@ const DesktopDiv = styled.div`
 
 const ButtonStyle = styled.button`
   border: none;
-  color: var(--dark-grayish-blue);
-  background: var(--very-dark-desaturated-blue);
+  color: ${(props) =>
+    props.primary ? ({ theme }) => theme.filterButtons : "hsl(234, 11%, 52%)"};
+  background: ${({ theme }) => theme.buttonBackground};
   font-size: 16px;
   font-family: "Josefin Sans", sans-serif;
   cursor: pointer;
@@ -68,7 +69,7 @@ const ButtonStyle = styled.button`
   }
 
   &:hover {
-    color: var(--light-grayish-blue-hover);
+    color: ${({ theme }) => theme.buttonHover};
   }
 `;
 
@@ -79,7 +80,6 @@ function TodoMobileFilter() {
     handleClickCompleted,
     handleClickAll,
     handleClickActiveOne,
-    clickAll,
   } = useContext(Context);
 
   return (
@@ -89,26 +89,28 @@ function TodoMobileFilter() {
         <ButtonStyle onClick={clearCompleted}>Clear completed</ButtonStyle>
       </ClearDiv>
       <FilterDiv>
-        <ButtonStyle
-          style={{ color: clickAll ? "var(--bright-blue)" : null }}
-          onClick={handleClickAll}
-        >
+        <ButtonStyle primary onClick={handleClickAll}>
           All
         </ButtonStyle>
-        <ButtonStyle onClick={handleClickActiveOne}>Active</ButtonStyle>
-        <ButtonStyle onClick={handleClickCompleted}>Completed</ButtonStyle>
+        <ButtonStyle primary onClick={handleClickActiveOne}>
+          Active
+        </ButtonStyle>
+        <ButtonStyle primary onClick={handleClickCompleted}>
+          Completed
+        </ButtonStyle>
       </FilterDiv>
       <DesktopDiv>
-        {`${storedTodos.length} items left`}
-        <div>
-          <ButtonStyle
-            style={{ color: clickAll ? "var(--bright-blue)" : null }}
-            onClick={handleClickAll}
-          >
+        <div className="itemsLeft">{`${storedTodos.length} items left`}</div>
+        <div className="filterButtons">
+          <ButtonStyle primary onClick={handleClickAll}>
             All
           </ButtonStyle>
-          <ButtonStyle onClick={handleClickActiveOne}>Active</ButtonStyle>
-          <ButtonStyle onClick={handleClickCompleted}>Completed</ButtonStyle>
+          <ButtonStyle primary onClick={handleClickActiveOne}>
+            Active
+          </ButtonStyle>
+          <ButtonStyle primary onClick={handleClickCompleted}>
+            Completed
+          </ButtonStyle>
         </div>
         <ButtonStyle onClick={clearCompleted}>Clear completed</ButtonStyle>
       </DesktopDiv>
