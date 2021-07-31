@@ -1,8 +1,7 @@
-//import "./App.css";
 import React, { useState } from "react";
 import { GlobalStyles } from "./GlobalStyle.style";
 import { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme } from "./components/Themes";
+import { lightTheme, darkTheme } from "./components/Themes.style";
 import styled from "styled-components";
 
 import Header from "./components/Header";

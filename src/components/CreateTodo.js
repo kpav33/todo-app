@@ -18,9 +18,8 @@ const StyledInput = styled.input`
   font-family: "Josefin Sans", sans-serif;
   font-size: 16px;
   caret-color: var(--bright-blue);
-  //padding-left: 3.5rem;
 `;
-// Maybe remove looks a bit weird??
+// Part of design, but I don't like how it looks
 /*const Dot = styled.div`
   height: 25px;
   width: 25px;
@@ -38,7 +37,8 @@ function CreateTodo() {
 
   return (
     <StyledForm onSubmit={onSubmit}>
-      {/* Dot added temporarly, part of the design, but I don't like how it looks */}
+      {/*// Dot part of design, but I don't like how it looks
+       */}
       {/*<Dot />*/}
       <StyledInput
         type="text"

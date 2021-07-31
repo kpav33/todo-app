@@ -98,7 +98,7 @@ const CheckBoxContainer = styled.div`
   }
 `;
 
-function TodoItem({ todo }) {
+function TodoItem({ todo, innerRef, provided }) {
   const { handleChecked, handleDeleteClick } = useContext(Context);
 
   // Instead of tracking a seperate state for each TodoItem you could keep an object in state that has a key indicating if the object with that particular key as index is hovered or not
@@ -111,6 +111,9 @@ function TodoItem({ todo }) {
 
   return (
     <TodoContainer
+      {...provided.draggableProps}
+      {...provided.dragHandleProps}
+      ref={innerRef}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

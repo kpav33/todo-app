@@ -41,7 +41,6 @@ export const GlobalStyles = createGlobalStyle`
     body {
         margin: 0;
         padding: 0;
-        //color: ${({ theme }) => theme.text};
         color: white;
         background: url(${({ theme }) => theme.imgMobile});
         background-repeat: no-repeat;

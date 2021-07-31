@@ -80,6 +80,7 @@ function TodoMobileFilter() {
     handleClickCompleted,
     handleClickAll,
     handleClickActiveOne,
+    clickAll,
   } = useContext(Context);
 
   return (
@@ -89,7 +90,11 @@ function TodoMobileFilter() {
         <ButtonStyle onClick={clearCompleted}>Clear completed</ButtonStyle>
       </ClearDiv>
       <FilterDiv>
-        <ButtonStyle primary onClick={handleClickAll}>
+        <ButtonStyle
+          primary
+          onClick={handleClickAll}
+          style={{ color: clickAll && "var(--bright-blue)" }}
+        >
           All
         </ButtonStyle>
         <ButtonStyle primary onClick={handleClickActiveOne}>
@@ -102,7 +107,11 @@ function TodoMobileFilter() {
       <DesktopDiv>
         <div className="itemsLeft">{`${storedTodos.length} items left`}</div>
         <div className="filterButtons">
-          <ButtonStyle primary onClick={handleClickAll}>
+          <ButtonStyle
+            primary
+            onClick={handleClickAll}
+            style={{ color: clickAll && "var(--bright-blue)" }}
+          >
             All
           </ButtonStyle>
           <ButtonStyle primary onClick={handleClickActiveOne}>

@@ -31,7 +31,6 @@ function ContextProvider({ children }) {
     if (value === "") {
       return null;
     } else {
-      /// console.log(value);
       let todo = {
         id: uniqueId(),
         text: value[0].toUpperCase() + value.slice(1),
@@ -57,7 +56,6 @@ function ContextProvider({ children }) {
 
   // Store active todos
   function handleClickActive() {
-    //const activeTodos = storedTodos.filter((todo) => todo.completed === false);
     const todoArray = storedTodos;
     setStoredTodosBackup(todoArray);
     setStoredTodos((prevState) =>
@@ -66,13 +64,10 @@ function ContextProvider({ children }) {
     console.log(todoArray);
   }
 
-  //console.log(isHovering);
-
   // Handle deleting a single item from todo list
   function handleDeleteClick(event) {
     let targetId =
       event.target.parentNode.childNodes[0].children[0].childNodes[0].id;
-    //console.log(targetId);
     setStoredTodos((prevState) => {
       const updatedTodos = prevState.filter((todo) => todo.id !== targetId);
       return updatedTodos;
@@ -87,6 +82,7 @@ function ContextProvider({ children }) {
     });
   }
 
+  // Enable switching between all, active and completed todo items
   const [clickAll, setClickAll] = useState(true);
   const [clickActive, setClickActive] = useState(false);
   const [clickCompleted, setClickCompleted] = useState(false);
@@ -107,6 +103,17 @@ function ContextProvider({ children }) {
     setClickAll(false);
     setClickActive(false);
     setClickCompleted(true);
+  }
+
+  // Allow user to switch the order of todo items by dragging and droping them at the desired position
+  function handleOnDragEnd(result) {
+    if (!result.destination) return;
+    //const items = Array.from(storedTodos);
+    const items = [...storedTodos];
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setStoredTodos(items);
   }
 
   return (
@@ -131,6 +138,7 @@ function ContextProvider({ children }) {
         handleClickAll,
         handleClickActiveOne,
         handleClickCompleted,
+        handleOnDragEnd,
       }}
     >
       {children}
