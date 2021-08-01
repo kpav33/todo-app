@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-
 import { Context } from "../Context";
+
+import Checkbox from "./Checkbox";
 import { VscClose } from "react-icons/vsc";
 
 const TodoContainer = styled.div`
@@ -45,61 +46,8 @@ const TodoContainerItem = styled.div`
   }
 `;
 
-const CheckBoxContainer = styled.div`
-  position: relative;
-
-  label {
-    background-color: ${({ theme }) => theme.labelBackgroundColor};
-    border: 1px solid ${({ theme }) => theme.labelBorder};
-    border-radius: 50%;
-    cursor: pointer;
-    height: 25px;
-    left: 0;
-    position: absolute;
-    top: -4px;
-    width: 25px;
-
-    &:hover {
-      outline: 1px solid var(--bright-blue);
-    }
-  }
-
-  // Modify border width to make checkbox bolder or thinner
-  label::after {
-    border: 3px solid #fff;
-    border-top: none;
-    border-right: none;
-    content: "";
-    height: 6px;
-    left: 6px;
-    opacity: 0;
-    position: absolute;
-    top: 8px;
-    transform: rotate(-45deg);
-    width: 12px;
-  }
-
-  // Cant focus if set to visibility: hidden
-  input {
-    opacity: 0;
-  }
-
-  input:focus + label {
-    outline: 2px solid var(--bright-blue);
-  }
-
-  input:checked + label {
-    background: var(--check-background);
-    border-color: ${({ theme }) => theme.labelBorder};
-  }
-
-  input:checked + label::after {
-    opacity: 1;
-  }
-`;
-
 function TodoItem({ todo, innerRef, provided }) {
-  const { handleChecked, handleDeleteClick } = useContext(Context);
+  const { handleDeleteClick } = useContext(Context);
 
   // Instead of tracking a seperate state for each TodoItem you could keep an object in state that has a key indicating if the object with that particular key as index is hovered or not
   // https://stackoverflow.com/questions/53194663/reactjs-render-single-icon-on-hover-for-list-item-rendered-from-array
@@ -118,15 +66,7 @@ function TodoItem({ todo, innerRef, provided }) {
       onMouseLeave={() => setHover(false)}
     >
       <TodoContainerItem>
-        <CheckBoxContainer>
-          <input
-            type="checkbox"
-            id={todo.id}
-            checked={todo.completed}
-            onChange={() => handleChecked(todo.id)}
-          />
-          <label htmlFor={todo.id} />
-        </CheckBoxContainer>
+        <Checkbox todo={todo} />
         <p className={todo.completed ? "styleCompleted" : null}>{todo.text}</p>
       </TodoContainerItem>
       {hover && (

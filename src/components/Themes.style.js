@@ -4,9 +4,6 @@ import imgLightDesktop from "../images/bg-desktop-light.jpg";
 import imgLightMobile from "../images/bg-mobile-light.jpg";
 
 export const lightTheme = {
-  body: "#FFF",
-  text: "#363537",
-  toggleBorder: "#FFF",
   background: "hsl(0, 0%, 95%)",
   imgMobile: imgLightMobile,
   imgDesktop: imgLightDesktop,
@@ -30,9 +27,6 @@ export const lightTheme = {
   buttonHover: "hsl(233, 14%, 35%)",
 };
 export const darkTheme = {
-  body: "#363537",
-  text: "#FAFAFA",
-  toggleBorder: "#6B8096",
   background: "hsl(235, 21%, 11%)",
   imgMobile: imgDarkMobile,
   imgDesktop: imgDarkDesktop,

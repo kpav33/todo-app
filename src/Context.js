@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Context = React.createContext();
 
@@ -11,9 +11,15 @@ const Context = React.createContext();
 
 function ContextProvider({ children }) {
   // Lodash unique id generator
-  let uniqueId = require("lodash.uniqueid");
+  //let uniqueId = require("lodash.uniqueid");
+  // Custom unique id generator (added to make sure id is unique everytime even after storing todos to localStorage)
+  let uniqueId = function () {
+    return "_" + Math.random().toString(36).substr(2, 9);
+  };
   // Store created todos as objects in an array
-  const [storedTodos, setStoredTodos] = useState([]);
+  const [storedTodos, setStoredTodos] = useState(
+    JSON.parse(localStorage.getItem("savedTodos")) || []
+  );
   // StoredTodos backup
   const [storedTodosBackup, setStoredTodosBackup] = useState([]);
   // Only active todos
@@ -116,6 +122,19 @@ function ContextProvider({ children }) {
     setStoredTodos(items);
   }
 
+  // Save created todos to localStorage
+  useEffect(() => {
+    localStorage.setItem("savedTodos", JSON.stringify(storedTodos));
+  }, [storedTodos]);
+
+  // Clear all saved todos from localStorage
+  function clearLocalStorage() {
+    let theme = localStorage.getItem("savedTheme");
+    localStorage.clear();
+    localStorage.setItem("savedTheme", theme);
+    window.location.reload();
+  }
+
   return (
     <Context.Provider
       value={{
@@ -139,6 +158,7 @@ function ContextProvider({ children }) {
         handleClickActiveOne,
         handleClickCompleted,
         handleOnDragEnd,
+        clearLocalStorage,
       }}
     >
       {children}

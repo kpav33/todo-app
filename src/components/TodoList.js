@@ -22,45 +22,29 @@ function TodoList() {
     handleOnDragEnd,
   } = useContext(Context);
 
-  const todos = storedTodos.map((todo, index) => (
-    <Draggable key={todo.id} draggableId={todo.id} index={index}>
-      {(provided) => (
-        <TodoItem
-          todo={todo}
-          innerRef={provided.innerRef}
-          provided={provided}
-        />
-      )}
-    </Draggable>
-  ));
+  function draggable(todo, index) {
+    return (
+      <Draggable key={todo.id} draggableId={todo.id} index={index}>
+        {(provided) => (
+          <TodoItem
+            todo={todo}
+            innerRef={provided.innerRef}
+            provided={provided}
+          />
+        )}
+      </Draggable>
+    );
+  }
+
+  const todos = storedTodos.map((todo, index) => draggable(todo, index));
 
   const todosActive = storedTodos
     .filter((todo) => todo.completed === false)
-    .map((todo, index) => (
-      <Draggable key={todo.id} draggableId={todo.id} index={index}>
-        {(provided) => (
-          <TodoItem
-            todo={todo}
-            innerRef={provided.innerRef}
-            provided={provided}
-          />
-        )}
-      </Draggable>
-    ));
+    .map((todo, index) => draggable(todo, index));
 
   const todosCompleted = storedTodos
     .filter((todo) => todo.completed === true)
-    .map((todo, index) => (
-      <Draggable key={todo.id} draggableId={todo.id} index={index}>
-        {(provided) => (
-          <TodoItem
-            todo={todo}
-            innerRef={provided.innerRef}
-            provided={provided}
-          />
-        )}
-      </Draggable>
-    ));
+    .map((todo, index) => draggable(todo, index));
 
   // Used react-beautiful-dnd to enable drag and drop functionality
   return (

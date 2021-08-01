@@ -2,34 +2,25 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { Context } from "../Context";
 
-const ClearDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  background: ${({ theme }) => theme.backgroundClearDiv};
-  padding: 1.5rem;
-  color: ${({ theme }) => theme.backgroundClearDivColor};
-  font-size: 16px;
-  border-radius: 0 0 8px 8px;
+const DesktopDiv = styled.div`
+  display: none;
 
   @media only screen and (min-width: 768px) {
-    display: none;
-  }
-`;
+    display: flex;
+    width: 100%;
+    background: ${({ theme }) => theme.backgroundDesktopDiv};
+    padding: 1.5rem;
+    color: ${({ theme }) => theme.desktopDivColor};
+    font-size: 16px;
+    border-radius: 0 0 8px 8px;
+    justify-content: space-between;
+    align-items: center;
 
-const FilterDiv = styled.div`
-  margin-top: 1rem;
-  background: ${({ theme }) => theme.backgroundFilterDiv};
-  padding: 1.5rem;
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  border-radius: 8px;
-
-  @media only screen and (min-width: 768px) {
-    display: none;
+    div {
+      button {
+        margin-left: 1rem;
+      }
+    }
   }
 `;
 
@@ -51,7 +42,7 @@ const ButtonStyle = styled.button`
   }
 `;
 
-function TodoMobileFilter() {
+function TodoDesktopFilter() {
   const {
     storedTodos,
     clearCompleted,
@@ -62,12 +53,9 @@ function TodoMobileFilter() {
   } = useContext(Context);
 
   return (
-    <>
-      <ClearDiv>
-        <div>{`${storedTodos.length} items left`}</div>
-        <ButtonStyle onClick={clearCompleted}>Clear completed</ButtonStyle>
-      </ClearDiv>
-      <FilterDiv>
+    <DesktopDiv>
+      <div className="itemsLeft">{`${storedTodos.length} items left`}</div>
+      <div className="filterButtons">
         <ButtonStyle
           primary
           onClick={handleClickAll}
@@ -81,9 +69,10 @@ function TodoMobileFilter() {
         <ButtonStyle primary onClick={handleClickCompleted}>
           Completed
         </ButtonStyle>
-      </FilterDiv>
-    </>
+      </div>
+      <ButtonStyle onClick={clearCompleted}>Clear completed</ButtonStyle>
+    </DesktopDiv>
   );
 }
 
-export default TodoMobileFilter;
+export default TodoDesktopFilter;
