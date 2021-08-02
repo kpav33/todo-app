@@ -34,6 +34,7 @@ const CheckBoxContainer = styled.div`
     top: 8px;
     transform: rotate(-45deg);
     width: 12px;
+    transition: all 0.3s linear;
   }
 
   // Cant focus if set to visibility: hidden

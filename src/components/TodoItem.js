@@ -44,6 +44,11 @@ const TodoContainerItem = styled.div`
   .styleCompleted {
     color: ${({ theme }) => theme.todoFinished};
     text-decoration: line-through;
+    transition: all 0.5s linear;
+  }
+
+  .styleOver {
+    transition: all 0.5s linear;
   }
 `;
 
@@ -68,7 +73,9 @@ function TodoItem({ todo, innerRef, provided }) {
     >
       <TodoContainerItem>
         <Checkbox todo={todo} />
-        <p className={todo.completed ? "styleCompleted" : null}>{todo.text}</p>
+        <p className={todo.completed ? "styleCompleted" : "styleOver"}>
+          {todo.text}
+        </p>
       </TodoContainerItem>
       {hover && (
         <VscClose
