@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 import { FiSun } from "react-icons/fi";
 import { IoMoonSharp } from "react-icons/io5";
@@ -39,5 +40,10 @@ function Header({ themeToggler, theme }) {
     </HeaderStyle>
   );
 }
+
+Header.propTypes = {
+  themeToggler: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
+};
 
 export default Header;

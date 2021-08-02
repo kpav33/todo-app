@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Context } from "../Context";
+import PropTypes from "prop-types";
 
 import Checkbox from "./Checkbox";
 import { VscClose } from "react-icons/vsc";
@@ -79,5 +80,11 @@ function TodoItem({ todo, innerRef, provided }) {
     </TodoContainer>
   );
 }
+
+TodoItem.propTypes = {
+  todo: PropTypes.object.isRequired,
+  innerRef: PropTypes.func.isRequired,
+  provided: PropTypes.object.isRequired,
+};
 
 export default TodoItem;
